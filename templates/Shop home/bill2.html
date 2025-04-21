@@ -1,0 +1,56 @@
+{% extends 'Shop home/shopindx.html' %}
+{% block body %}
+<body>
+  <div class="container-fluid">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Add Product to Bill</h6>
+        <a href="javascript:history.back()" class="btn btn-secondary btn-sm">
+          <i class="fas fa-arrow-left"></i> Back
+        </a>
+      </div>
+      <div class="card-body">
+        <form id="form1" name="form1" method="post" action="/addbill">
+          <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+              <table class="table table-bordered">
+                <tr>
+                  <td class="font-weight-bold">Product Name</td>
+                  <td>{{ val.PRODUCT.product_name }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Price</td>
+                  <td>₹{{ val.PRODUCT.price }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Quantity</td>
+                  <td>
+                    <input type="number" name="textfield" class="form-control" min="1" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center">
+                    <button type="submit" name="Submit" class="btn btn-success btn-lg">
+                      <i class="fas fa-plus-circle"></i> Add to Bill
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/static/js/sb-admin-2.min.js"></script>
+</body>
+{% endblock %}

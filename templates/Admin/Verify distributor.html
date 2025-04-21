@@ -1,0 +1,70 @@
+{% extends 'Admin/adminindex.html' %}
+{% block body %}
+<body>
+  <div class="container-fluid">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Distributor Approvals</h6>
+        <a href="{% url 'admin_home' %}" class="btn btn-primary btn-sm">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>ID Proof</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in val %}
+              <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.address }}</td>
+                <td>
+                  {% if i.id_proof %}
+                    <a href="{{ i.id_proof.url }}" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
+                  {% else %}
+                    N/A
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if i.LOGIN.type == "pending" %}
+                    <div class="d-flex flex-column">
+                      <a href="accept_distributor/{{ i.LOGIN.id }}" class="btn btn-success btn-sm mb-1">
+                        <i class="fas fa-check"></i> Accept
+                      </a>
+                      <a href="reject_distributor/{{ i.LOGIN.id }}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-times"></i> Reject
+                      </a>
+                    </div>
+                  {% elif i.LOGIN.type == "distributor" %}
+                    <p>Accepted</p>  <!-- Kept original text display -->
+                  {% elif i.LOGIN.type == "Rejected" %}
+                    <p>Rejected</p>  <!-- Kept original text display -->
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/static/js/sb-admin-2.min.js"></script>
+</body>
+{% endblock %}
